@@ -1,4 +1,4 @@
-package com.flb.ws_etutoring;
+package com.flb.ws_etutoring.models;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.flb.ws_etutoring.utils.ImageUtils;
 
 @Entity
 public class Usuario {
@@ -38,7 +39,7 @@ public class Usuario {
     @Lob
     @Column(length = 10000)
     private byte[] fotoPerfil;
-    
+
     @Column(unique=true)
     private String username;
     private String password;
@@ -135,6 +136,10 @@ public class Usuario {
 
     public void setFotoPerfil(byte[] fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
+    }
+    
+    public String getImageView() {
+        return ImageUtils.getImgData(this.fotoPerfil);
     }
 
     public String getUsername() {
