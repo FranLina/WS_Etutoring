@@ -3,6 +3,7 @@ package com.flb.ws_etutoring.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,8 +13,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flb.ws_etutoring.utils.ImageUtils;
 
 @Entity
@@ -28,7 +33,6 @@ public class Usuario {
     private Date fechaNacimiento;
     private String correo;
     private String ciudad;
-    private String direccion;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_tipo", joinColumns = { @JoinColumn(name = "usuario_codigo") }, inverseJoinColumns = {
@@ -36,11 +40,33 @@ public class Usuario {
     })
     private List<Tipo> tipo;
 
+    @ManyToOne()
+    @JoinColumn(name = "materia_id")
+    private Materia materia;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuarioValorador")
+    private List<Valoracion> valoraciones;
+
+    /*@OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Usuario> clasesDadas;
+
+    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Usuario> clasesRecibidas;*/
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+    private List<Direccion> direcciones;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "profesor", fetch = FetchType.LAZY)
+    private Calendario calendario;
+
     @Lob
     @Column(length = 10000)
     private byte[] fotoPerfil;
 
-    @Column(unique=true)
+    @Column(unique = true)
     private String username;
     private String password;
 
@@ -49,21 +75,6 @@ public class Usuario {
 
     public Usuario(int id) {
         this.id = id;
-    }
-
-    public Usuario(int id, String nombre, String apellidos, Date fechaNacimiento, String correo, String ciudad,
-            String direccion, List<Tipo> tipo, byte[] fotoPerfil, String username, String password) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.fechaNacimiento = fechaNacimiento;
-        this.correo = correo;
-        this.ciudad = ciudad;
-        this.direccion = direccion;
-        this.tipo = tipo;
-        this.fotoPerfil = fotoPerfil;
-        this.username = username;
-        this.password = password;
     }
 
     public int getId() {
@@ -114,20 +125,60 @@ public class Usuario {
         this.ciudad = ciudad;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     public List<Tipo> getTipo() {
         return tipo;
     }
 
     public void setTipo(List<Tipo> tipo) {
         this.tipo = tipo;
+    }
+
+    public List<Valoracion> getValoraciones() {
+        return valoraciones;
+    }
+
+    public void setValoraciones(List<Valoracion> valoraciones) {
+        this.valoraciones = valoraciones;
+    }
+
+    /*public List<Usuario> getClasesDadas() {
+        return clasesDadas;
+    }
+
+    public void setClasesDadas(List<Usuario> clasesDadas) {
+        this.clasesDadas = clasesDadas;
+    }
+
+    public List<Usuario> getClasesRecibidas() {
+        return clasesRecibidas;
+    }
+
+    public void setClasesRecibidas(List<Usuario> clasesRecibidas) {
+        this.clasesRecibidas = clasesRecibidas;
+    }*/
+
+    public List<Direccion> getDirecciones() {
+        return direcciones;
+    }
+
+    public void setDirecciones(List<Direccion> direcciones) {
+        this.direcciones = direcciones;
+    }
+
+    public Calendario getCalendario() {
+        return calendario;
+    }
+
+    public void setCalendario(Calendario calendario) {
+        this.calendario = calendario;
+    }
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
     }
 
     public byte[] getFotoPerfil() {
@@ -137,7 +188,7 @@ public class Usuario {
     public void setFotoPerfil(byte[] fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
-    
+
     public String getImageView() {
         return ImageUtils.getImgData(this.fotoPerfil);
     }
@@ -179,4 +230,5 @@ public class Usuario {
             return false;
         return true;
     }
+
 }
