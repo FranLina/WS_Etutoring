@@ -3,11 +3,10 @@ package com.flb.ws_etutoring.models;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Calendario {
@@ -15,8 +14,8 @@ public class Calendario {
     @GeneratedValue
     private int id;
 
+    @ManyToOne()
     @JoinColumn(name = "profesor_id")
-    @OneToOne(fetch = FetchType.EAGER)
     private Usuario profesor;
 
     private Date fecha;

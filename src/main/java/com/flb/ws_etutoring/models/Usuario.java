@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -48,19 +47,23 @@ public class Usuario {
     @OneToMany(mappedBy = "usuarioValorador")
     private List<Valoracion> valoraciones;
 
-    /*@OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Usuario> clasesDadas;
-
-    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Usuario> clasesRecibidas;*/
+    /*
+     * @OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL, orphanRemoval =
+     * true)
+     * private List<Usuario> clasesDadas;
+     * 
+     * @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, orphanRemoval =
+     * true)
+     * private List<Usuario> clasesRecibidas;
+     */
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
     private List<Direccion> direcciones;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "profesor", fetch = FetchType.LAZY)
-    private Calendario calendario;
+    @OneToMany(mappedBy = "profesor")
+    private List<Calendario> calendario;
 
     @Lob
     @Column(length = 10000)
@@ -141,21 +144,23 @@ public class Usuario {
         this.valoraciones = valoraciones;
     }
 
-    /*public List<Usuario> getClasesDadas() {
-        return clasesDadas;
-    }
-
-    public void setClasesDadas(List<Usuario> clasesDadas) {
-        this.clasesDadas = clasesDadas;
-    }
-
-    public List<Usuario> getClasesRecibidas() {
-        return clasesRecibidas;
-    }
-
-    public void setClasesRecibidas(List<Usuario> clasesRecibidas) {
-        this.clasesRecibidas = clasesRecibidas;
-    }*/
+    /*
+     * public List<Usuario> getClasesDadas() {
+     * return clasesDadas;
+     * }
+     * 
+     * public void setClasesDadas(List<Usuario> clasesDadas) {
+     * this.clasesDadas = clasesDadas;
+     * }
+     * 
+     * public List<Usuario> getClasesRecibidas() {
+     * return clasesRecibidas;
+     * }
+     * 
+     * public void setClasesRecibidas(List<Usuario> clasesRecibidas) {
+     * this.clasesRecibidas = clasesRecibidas;
+     * }
+     */
 
     public List<Direccion> getDirecciones() {
         return direcciones;
@@ -165,11 +170,11 @@ public class Usuario {
         this.direcciones = direcciones;
     }
 
-    public Calendario getCalendario() {
+    public List<Calendario> getCalendario() {
         return calendario;
     }
 
-    public void setCalendario(Calendario calendario) {
+    public void setCalendario(List<Calendario> calendario) {
         this.calendario = calendario;
     }
 

@@ -38,14 +38,14 @@ public class CalendarioServiceImpl implements CalendarioService {
 
     @Override
     public Calendario save(Calendario calendario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return cRepository.save(calendario);
     }
 
     @Override
     public void update(int id, Calendario calendario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        this.findById(id);
+        calendario.setId(id);
+        cRepository.save(calendario);
     }
 
     @Override

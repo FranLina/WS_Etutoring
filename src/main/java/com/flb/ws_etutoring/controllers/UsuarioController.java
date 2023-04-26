@@ -30,6 +30,17 @@ public class UsuarioController {
         return u;
     }
 
+    //Para recuperar todos los profesores que tienen una materia
+    @GetMapping("/usuarios/materia/{materia_id}")
+    List<Usuario> findByMateria(@PathVariable int materia_id) {
+        return uService.getUserByMateria(materia_id);
+    }
+
+    @GetMapping("/usuarios/buscar/{username}")
+    Usuario findByusername(@PathVariable String username) {
+        return uService.getByNombre(username);
+    }
+
     @DeleteMapping("/usuarios/{id}")
     void delete(@PathVariable int id) {
         uService.deleteUser(id);

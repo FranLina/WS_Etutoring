@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.flb.ws_etutoring.models.Materia;
 import com.flb.ws_etutoring.models.Usuario;
 import com.flb.ws_etutoring.repository.UsuarioRepository;
 
@@ -42,6 +43,11 @@ public class UsuarioService {
     }
 
     public List<Usuario> getAllUsers() {
-        return uRepository.findAll();
+        List<Usuario> lista =  uRepository.findAll();
+        return lista;
+    }
+
+    public List<Usuario> getUserByMateria(int materia_id) {
+        return uRepository.findByMateria(new Materia(materia_id));
     }
 }
