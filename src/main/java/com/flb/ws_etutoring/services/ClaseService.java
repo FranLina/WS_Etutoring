@@ -3,9 +3,12 @@ package com.flb.ws_etutoring.services;
 import java.util.List;
 
 import com.flb.ws_etutoring.models.Clase;
+import com.flb.ws_etutoring.models.Usuario;
 
 public interface ClaseService {
     public List<Clase> findAll();
+
+    public List<Clase> findByAlumno(Usuario alumno);
 
     public Clase findById(int id);
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flb.ws_etutoring.models.Clase;
+import com.flb.ws_etutoring.models.Usuario;
 import com.flb.ws_etutoring.repository.ClaseRepository;
 import com.flb.ws_etutoring.services.ClaseService;
 
@@ -19,6 +20,11 @@ public class ClaseServiceImpl implements ClaseService {
     @Override
     public List<Clase> findAll() {
         return cRepository.findAll();
+    }
+
+    @Override
+    public List<Clase> findByAlumno(Usuario alumno) {
+        return cRepository.findByAlumno(alumno);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.flb.ws_etutoring.services.Impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +53,11 @@ public class CalendarioServiceImpl implements CalendarioService {
     public void deleteById(int id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+    }
+
+    @Override
+    public List<Calendario> findByProfesorAndFecha(Usuario profesor, Date fecha) {
+        return cRepository.findByProfesorAndFecha(profesor, fecha);
     }
 
 }

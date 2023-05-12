@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flb.ws_etutoring.models.Clase;
+import com.flb.ws_etutoring.models.Usuario;
 import com.flb.ws_etutoring.services.ClaseService;
 
 @RestController
@@ -22,6 +23,13 @@ public class ClaseController {
     @GetMapping("/clases")
     List<Clase> all() {
         return cService.findAll();
+    }
+
+    @GetMapping("/clases/usuario/{id}")
+    List<Clase> findByAlumno(@PathVariable int id) {
+        Usuario alumno = new Usuario();
+        alumno.setId(id);
+        return cService.findByAlumno(alumno);
     }
 
     @GetMapping("clases/{id}")

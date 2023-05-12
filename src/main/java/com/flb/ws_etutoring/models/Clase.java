@@ -20,12 +20,10 @@ public class Clase {
     @GeneratedValue
     private int id;
 
-    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "profesor_id")
     private Usuario profesor;
 
-    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "alumno_id")
     private Usuario alumno;

@@ -1,5 +1,8 @@
 package com.flb.ws_etutoring.controllers;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,22 @@ public class CalendarioController {
         Usuario profesor = new Usuario();
         profesor.setId(id);
         List<Calendario> c = cService.findByProfesor(profesor);
+        return c;
+    }
+
+    @GetMapping("calendarios/reservar/{id}/{year}/{month}/{day}")
+    List<Calendario> findByProfesorAndFecha(@PathVariable int id,
+            @PathVariable int year,
+            @PathVariable int month,
+            @PathVariable int day) {
+
+        Usuario profesor = new Usuario();
+        profesor.setId(id);
+
+        LocalDate dia = LocalDate.of(year, month, day);
+
+        List<Calendario> c = cService.findByProfesorAndFecha(profesor, Date
+                .from(dia.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
         return c;
     }
 

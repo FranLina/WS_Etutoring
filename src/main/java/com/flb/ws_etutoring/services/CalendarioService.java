@@ -1,5 +1,6 @@
 package com.flb.ws_etutoring.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.flb.ws_etutoring.models.Calendario;
@@ -11,6 +12,8 @@ public interface CalendarioService {
     public Calendario findById(int id);
 
     public List<Calendario> findByProfesor(Usuario profesor);
+
+    public List<Calendario> findByProfesorAndFecha(Usuario profesor, Date fecha);
 
     public Calendario save(Calendario calendario);
 
