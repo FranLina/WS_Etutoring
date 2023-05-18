@@ -35,6 +35,22 @@ public class CalendarioController {
         return u;
     }
 
+    @GetMapping("calendarios/cancelar/{year}/{month}/{day}/{horarios}/{id}")
+    Calendario findByFechaAndHorarios(@PathVariable int year,
+            @PathVariable int month,
+            @PathVariable int day,
+            @PathVariable String horarios,
+            @PathVariable int id) {
+
+        Usuario profesor = new Usuario();
+        profesor.setId(id);
+        LocalDate dia = LocalDate.of(year, month, day);
+
+        Calendario c = cService.findByFechaAndHorariosAndProfesor(Date
+                .from(dia.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), horarios, profesor);
+        return c;
+    }
+
     @GetMapping("calendarios/profesor/{id}")
     List<Calendario> findByProfesor(@PathVariable int id) {
         Usuario profesor = new Usuario();

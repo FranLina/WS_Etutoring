@@ -32,6 +32,13 @@ public class ClaseController {
         return cService.findByAlumno(alumno);
     }
 
+    @GetMapping("/clases/profesor/{id}")
+    List<Clase> findByProfesor(@PathVariable int id) {
+        Usuario profesor = new Usuario();
+        profesor.setId(id);
+        return cService.findByProfesor(profesor);
+    }
+
     @GetMapping("clases/{id}")
     Clase find(@PathVariable int id) {
         Clase u = cService.findById(id);

@@ -33,6 +33,21 @@ public class CalendarioServiceImpl implements CalendarioService {
     }
 
     @Override
+    public Calendario findByFechaAndHorariosAndProfesor(Date fecha, String horarios, Usuario profesor) {
+        Optional<Calendario> findByFechaAndHorarios = cRepository.findByFechaAndHorariosAndProfesor(fecha, horarios,
+                profesor);
+        if (findByFechaAndHorarios != null) {
+            return findByFechaAndHorarios.get();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Calendario> findByProfesorAndFecha(Usuario profesor, Date fecha) {
+        return cRepository.findByProfesorAndFecha(profesor, fecha);
+    }
+
+    @Override
     public List<Calendario> findByProfesor(Usuario profesor) {
         return cRepository.findByProfesor(profesor);
     }
@@ -51,13 +66,7 @@ public class CalendarioServiceImpl implements CalendarioService {
 
     @Override
     public void deleteById(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
-    }
-
-    @Override
-    public List<Calendario> findByProfesorAndFecha(Usuario profesor, Date fecha) {
-        return cRepository.findByProfesorAndFecha(profesor, fecha);
+        cRepository.deleteById(id);
     }
 
 }

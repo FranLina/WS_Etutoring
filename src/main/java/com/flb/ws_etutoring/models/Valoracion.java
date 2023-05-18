@@ -1,5 +1,7 @@
 package com.flb.ws_etutoring.models;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,6 +26,7 @@ public class Valoracion {
     private Usuario usuarioValorador;
     private String comentario;
     private int puntuacion;
+    private Date fechaValoracion;
 
     public int getId() {
         return id;
@@ -63,6 +66,14 @@ public class Valoracion {
 
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
+    }
+
+    public Date getFechaValoracion() {
+        return fechaValoracion;
+    }
+
+    public void setFechaValoracion(Date fechaValoracion) {
+        this.fechaValoracion = fechaValoracion;
     }
 
 }

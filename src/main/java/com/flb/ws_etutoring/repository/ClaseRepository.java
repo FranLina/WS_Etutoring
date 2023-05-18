@@ -11,4 +11,6 @@ import com.flb.ws_etutoring.models.Usuario;
 @Repository
 public interface ClaseRepository extends JpaRepository<Clase, Integer> {
     List<Clase> findByAlumno(Usuario alumno);
+
+    List<Clase> findByProfesorAndValoracionNotNull(Usuario profesor);
 }
