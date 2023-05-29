@@ -53,6 +53,11 @@ public class CalendarioServiceImpl implements CalendarioService {
     }
 
     @Override
+    public List<Calendario> findByProfesorAndReservado(Usuario profesor, Boolean reservado) {
+        return cRepository.findByProfesorAndReservado(profesor, reservado);
+    }
+
+    @Override
     public Calendario save(Calendario calendario) {
         return cRepository.save(calendario);
     }

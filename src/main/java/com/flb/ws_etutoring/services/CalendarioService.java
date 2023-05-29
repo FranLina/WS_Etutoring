@@ -17,6 +17,8 @@ public interface CalendarioService {
 
     public List<Calendario> findByProfesorAndFecha(Usuario profesor, Date fecha);
 
+    public List<Calendario> findByProfesorAndReservado(Usuario profesor, Boolean reservado);
+
     public Calendario save(Calendario calendario);
 
     public void update(int id, Calendario calendario);

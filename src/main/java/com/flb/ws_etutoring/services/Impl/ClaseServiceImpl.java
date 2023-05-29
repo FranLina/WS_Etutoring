@@ -1,5 +1,6 @@
 package com.flb.ws_etutoring.services.Impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,16 @@ public class ClaseServiceImpl implements ClaseService {
     }
 
     @Override
+    public Clase findByFechaAndHorariosAndProfesor(Date fecha, String horarios, Usuario profesor) {
+        Optional<Clase> findByFechaAndHorarios = cRepository.findByFechaAndHorariosAndProfesor(fecha, horarios,
+                profesor);
+        if (findByFechaAndHorarios != null) {
+            return findByFechaAndHorarios.get();
+        }
+        return null;
+    }
+
+    @Override
     public Clase findById(int id) {
         Optional<Clase> findById = cRepository.findById(id);
         if (findById != null) {
@@ -57,5 +68,4 @@ public class ClaseServiceImpl implements ClaseService {
     public void deleteById(int id) {
         cRepository.deleteById(id);
     }
-
 }

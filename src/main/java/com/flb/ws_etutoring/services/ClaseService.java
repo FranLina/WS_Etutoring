@@ -1,5 +1,6 @@
 package com.flb.ws_etutoring.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.flb.ws_etutoring.models.Clase;
@@ -11,6 +12,8 @@ public interface ClaseService {
     public List<Clase> findByAlumno(Usuario alumno);
 
     public List<Clase> findByProfesor(Usuario profesor);
+
+    public Clase findByFechaAndHorariosAndProfesor(Date fecha, String horarios, Usuario profesor);
 
     public Clase findById(int id);
 

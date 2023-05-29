@@ -75,6 +75,15 @@ public class CalendarioController {
         return c;
     }
 
+    @GetMapping("calendarios/profesor/{id}/{reservado}")
+    List<Calendario> findByProfesorAndReservado(@PathVariable int id, @PathVariable Boolean reservado) {
+
+        Usuario profesor = new Usuario();
+        profesor.setId(id);
+        List<Calendario> c = cService.findByProfesorAndReservado(profesor, reservado);
+        return c;
+    }
+
     @DeleteMapping("/calendarios/{id}")
     void delete(@PathVariable int id) {
         cService.deleteById(id);

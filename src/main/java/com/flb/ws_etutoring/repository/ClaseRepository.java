@@ -1,6 +1,8 @@
 package com.flb.ws_etutoring.repository;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +15,6 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
     List<Clase> findByAlumno(Usuario alumno);
 
     List<Clase> findByProfesorAndValoracionNotNull(Usuario profesor);
+
+    Optional<Clase> findByFechaAndHorariosAndProfesor(Date fecha, String horarios, Usuario profesor);
 }
