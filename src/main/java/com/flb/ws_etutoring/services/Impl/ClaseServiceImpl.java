@@ -68,4 +68,9 @@ public class ClaseServiceImpl implements ClaseService {
     public void deleteById(int id) {
         cRepository.deleteById(id);
     }
+
+    @Override
+    public List<Clase> findByProfesorAndFecha(Usuario profesor, Date fecha) {
+        return cRepository.findByProfesorAndFecha(profesor, fecha);
+    }
 }

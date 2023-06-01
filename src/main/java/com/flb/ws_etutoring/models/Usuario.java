@@ -1,6 +1,4 @@
 package com.flb.ws_etutoring.models;
-
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
@@ -15,23 +14,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flb.ws_etutoring.utils.ImageUtils;
 
 @Entity
 public class Usuario {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nombre;
     private String apellidos;
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date fechaNacimiento;
     private String correo;
-    private String ciudad;
+
+    @ManyToOne()
+    @JoinColumn(name = "municipio_id")
+    private Municipios municipio;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_tipo", joinColumns = { @JoinColumn(name = "usuario_codigo") }, inverseJoinColumns = {
@@ -104,14 +102,6 @@ public class Usuario {
         this.apellidos = apellidos;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
     public String getCorreo() {
         return correo;
     }
@@ -119,14 +109,7 @@ public class Usuario {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
+    
 
     public List<Tipo> getTipo() {
         return tipo;
@@ -234,6 +217,14 @@ public class Usuario {
         if (id != other.id)
             return false;
         return true;
+    }
+
+    public Municipios getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Municipios municipio) {
+        this.municipio = municipio;
     }
 
 }

@@ -46,6 +46,22 @@ public class ClaseController {
         return cService.findByProfesor(profesor);
     }
 
+    @GetMapping("clases/profesor/{id}/{year}/{month}/{day}")
+    List<Clase> findByProfesorAndFecha(@PathVariable int id,
+            @PathVariable int year,
+            @PathVariable int month,
+            @PathVariable int day) {
+
+        Usuario profesor = new Usuario();
+        profesor.setId(id);
+
+        LocalDate dia = LocalDate.of(year, month, day);
+
+        List<Clase> c = cService.findByProfesorAndFecha(profesor, Date
+                .from(dia.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        return c;
+    }
+
     @GetMapping("/clases/cancelar/{year}/{month}/{day}/{horarios}/{id}")
     Clase findByFechaAndHorarios(@PathVariable int year,
             @PathVariable int month,
