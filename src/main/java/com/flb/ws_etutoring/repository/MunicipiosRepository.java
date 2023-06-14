@@ -11,4 +11,8 @@ import com.flb.ws_etutoring.models.Provincias;
 @Repository
 public interface MunicipiosRepository extends JpaRepository<Municipios, Integer> {
     List<Municipios> findByProvincia(Provincias provincia);
+
+    List<Municipios> findAllByOrderByMunicipioAsc();
+
+    List<Municipios> findByProvinciaOrderByMunicipioAsc(Provincias provincia);
 }

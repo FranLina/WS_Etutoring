@@ -77,6 +77,21 @@ public class ClaseController {
         return c;
     }
 
+    @GetMapping("/clases/comprobar/{year}/{month}/{day}/{horarios}/{id}")
+    Clase findByFechaAndHorariosAndAlumno(@PathVariable int year,
+            @PathVariable int month,
+            @PathVariable int day,
+            @PathVariable String horarios,
+            @PathVariable int id) {
+
+        Usuario alumno = uService.getUser(id);
+        LocalDate dia = LocalDate.of(year, month, day);
+
+        Clase c = cService.findByFechaAndHorariosAndAlumno(Date
+                .from(dia.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), horarios, alumno);
+        return c;
+    }
+
     @GetMapping("clases/{id}")
     Clase find(@PathVariable int id) {
         Clase u = cService.findById(id);

@@ -17,6 +17,8 @@ public interface CalendarioRepository extends JpaRepository<Calendario, Integer>
 
     List<Calendario> findByProfesorAndFecha(Usuario profesor, Date fecha);
 
+    List<Calendario> findByProfesorAndFechaGreaterThanEqual(Usuario profesor, Date fecha);
+
     List<Calendario> findByProfesorAndReservado(Usuario profesor, Boolean reservado);
 
     Optional<Calendario> findByFechaAndHorariosAndProfesor(Date fecha, String horarios, Usuario profesor);

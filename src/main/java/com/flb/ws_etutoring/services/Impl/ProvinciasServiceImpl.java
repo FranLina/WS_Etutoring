@@ -19,7 +19,7 @@ public class ProvinciasServiceImpl implements ProvinciasService {
 
     @Override
     public List<Provincias> findAll() {
-        return pRepository.findAll();
+        return pRepository.findAllByOrderByProvinciaAsc();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ProvinciasServiceImpl implements ProvinciasService {
 
     @Override
     public List<Provincias> findByCcaa(Ccaa ccaa) {
-        return pRepository.findByCcaa(ccaa);
+        return pRepository.findByCcaaOrderByProvinciaAsc(ccaa);
     }
 
 }

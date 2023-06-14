@@ -48,6 +48,11 @@ public class CalendarioServiceImpl implements CalendarioService {
     }
 
     @Override
+    public List<Calendario> findByProfesorAndGreaterThanEqualFecha(Usuario profesor, Date fecha) {
+        return cRepository.findByProfesorAndFechaGreaterThanEqual(profesor, fecha);
+    }
+
+    @Override
     public List<Calendario> findByProfesor(Usuario profesor) {
         return cRepository.findByProfesor(profesor);
     }

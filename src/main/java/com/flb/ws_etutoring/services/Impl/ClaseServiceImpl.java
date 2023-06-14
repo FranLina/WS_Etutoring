@@ -44,6 +44,16 @@ public class ClaseServiceImpl implements ClaseService {
     }
 
     @Override
+    public Clase findByFechaAndHorariosAndAlumno(Date fecha, String horarios, Usuario alumno) {
+        Optional<Clase> findByFechaAndHorarios = cRepository.findByFechaAndHorariosAndAlumno(fecha, horarios,
+                alumno);
+        if (findByFechaAndHorarios.isPresent()) {
+            return findByFechaAndHorarios.get();
+        }
+        return null;
+    }
+
+    @Override
     public Clase findById(int id) {
         Optional<Clase> findById = cRepository.findById(id);
         if (findById != null) {

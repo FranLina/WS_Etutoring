@@ -11,4 +11,9 @@ import com.flb.ws_etutoring.models.Provincias;
 @Repository
 public interface ProvinciaRepository extends JpaRepository<Provincias, Integer> {
     List<Provincias> findByCcaa(Ccaa ccaa);
+
+    List<Provincias> findByCcaaOrderByProvinciaAsc(Ccaa ccaa);
+
+    List<Provincias> findAllByOrderByProvinciaAsc();
+
 }

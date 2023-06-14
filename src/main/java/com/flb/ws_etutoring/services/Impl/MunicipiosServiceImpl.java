@@ -18,7 +18,7 @@ public class MunicipiosServiceImpl implements MunicipiosService {
 
     @Override
     public List<Municipios> findAll() {
-        return mRepository.findAll();
+        return mRepository.findAllByOrderByMunicipioAsc();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class MunicipiosServiceImpl implements MunicipiosService {
 
     @Override
     public List<Municipios> findByProvincia(Provincias provincia) {
-        return mRepository.findByProvincia(provincia);
+        return mRepository.findByProvinciaOrderByMunicipioAsc(provincia);
     }
 
 }

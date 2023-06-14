@@ -59,6 +59,20 @@ public class CalendarioController {
         return c;
     }
 
+    @GetMapping("calendarios/profesor/{id}/{year}/{month}/{day}")
+    List<Calendario> findByProfesorAndGreaterThanEqualFecha(@PathVariable int id, @PathVariable int year,
+            @PathVariable int month,
+            @PathVariable int day) {
+        Usuario profesor = new Usuario();
+        profesor.setId(id);
+
+        LocalDate dia = LocalDate.of(year, month, day);
+
+        List<Calendario> c = cService.findByProfesorAndGreaterThanEqualFecha(profesor, Date
+                .from(dia.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        return c;
+    }
+
     @GetMapping("calendarios/reservar/{id}/{year}/{month}/{day}")
     List<Calendario> findByProfesorAndFecha(@PathVariable int id,
             @PathVariable int year,
