@@ -46,6 +46,13 @@ public class ClaseController {
         return cService.findByProfesor(profesor);
     }
 
+    @GetMapping("/clases/profesorValNotNull/{id}")
+    List<Clase> findByProfesorAndValoracionNotNull(@PathVariable int id) {
+        Usuario profesor = new Usuario();
+        profesor.setId(id);
+        return cService.findByProfesorAndValoracionNotNull(profesor);
+    }
+
     @GetMapping("clases/profesor/{id}/{year}/{month}/{day}")
     List<Clase> findByProfesorAndFecha(@PathVariable int id,
             @PathVariable int year,

@@ -30,6 +30,11 @@ public class ClaseServiceImpl implements ClaseService {
 
     @Override
     public List<Clase> findByProfesor(Usuario profesor) {
+        return cRepository.findByProfesor(profesor);
+    }
+
+    @Override
+    public List<Clase> findByProfesorAndValoracionNotNull(Usuario profesor) {
         return cRepository.findByProfesorAndValoracionNotNull(profesor);
     }
 

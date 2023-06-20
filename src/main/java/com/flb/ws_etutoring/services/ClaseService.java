@@ -11,6 +11,8 @@ public interface ClaseService {
 
     public List<Clase> findByAlumno(Usuario alumno);
 
+    public List<Clase> findByProfesorAndValoracionNotNull(Usuario profesor);
+
     public List<Clase> findByProfesor(Usuario profesor);
 
     public Clase findByFechaAndHorariosAndProfesor(Date fecha, String horarios, Usuario profesor);

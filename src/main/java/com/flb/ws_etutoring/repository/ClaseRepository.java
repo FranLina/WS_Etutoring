@@ -16,6 +16,8 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
 
     List<Clase> findByProfesorAndValoracionNotNull(Usuario profesor);
 
+    List<Clase> findByProfesor(Usuario profesor);
+
     Optional<Clase> findByFechaAndHorariosAndProfesor(Date fecha, String horarios, Usuario profesor);
 
     Optional<Clase> findByFechaAndHorariosAndAlumno(Date fecha, String horarios, Usuario alumno);
